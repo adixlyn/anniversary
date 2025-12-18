@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Anniversary ❤️</title>
+
+<style>
+:root{
+  --bg1:#ff9a9e; --bg2:#fad0c4; --bg3:#fbc2eb;
+  --accent:#ff6f91;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  font-family:system-ui;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.card{
+  width:min(92vw,420px);
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(8px);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:pop .9s ease both;
+}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+
+.title{text-align:center;font-size:1.4rem;margin-bottom:6px}
+.date{text-align:center;font-size:.9rem;margin-bottom:12px}
+
+.photo{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+}
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  animation:float 8s ease-in-out infinite;
+}
+@keyframes float{50%{transform:scale(1.04)}}
+
+.heart{
+  position:absolute;
+  right:12px;bottom:12px;
+  font-size:1.6rem;
+  animation:beat 1.3s infinite;
+}
+@keyframes beat{50%{transform:scale(1.25)}}
+
+.message{
+  margin-top:14px;
+  line-height:1.5;
+  font-size:.95rem;
+}
+.controls{display:flex;gap:10px;margin-top:14px}
+button{
+  flex:1;border:0;border-radius:14px;
+  padding:10px;font-weight:600;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  cursor:pointer;
+}
+button.secondary{background:rgba(255,255,255,.3)}
+
+#surpriseBox{display:none;margin-top:14px;text-align:center}
+
+.floating-heart{
+  position:fixed;bottom:-20px;
+  animation:floatUp 8s linear infinite;
+}
+@keyframes floatUp{
+  to{transform:translateY(-120vh) scale(1.5);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="title">Happy 1st Anniversary 💕</div>
+  <div class="date">21 December</div>
+
+  <div class="photo">
+    <img src="us.jpeg" alt="Us Together">
+    <div class="heart">❤️</div>
+  </div>
+
+  <div class="message">
+    One year ago, something beautiful began. 🌙  
+    Distance tested us, but love won every time.  
+    <strong>I choose you. Always.</strong>
+  </div>
+
+  <div class="controls">
+    <button id="playBtn">▶ Play Song</button>
+    <button class="secondary" id="moreBtn">✨ Surprise</button>
+  </div>
+
+  <div id="surpriseBox">
+    <p style="margin-bottom:8px;">MY LYN, MY WIFE, MY BABY ❤️</p>
+    <p>TO MY WIFE(LYN, AN ANGRY BIRD);
+    EVEN YOU ANGRY AT ME SOMETIMES BUT LOVE, EVERY SMILE OF YOURS IS MY FAVORITE MEMORY. EVEN MILES APART, MY HEART IS ALWAYS WITH YOU, IM ALWAYS PROUD OF YOU MY LOVE, ALWAYS BE WITH ME LOVE 💍
+    YOUR HUSBAND (ADI)</p>
+  </div>
+
+  <div style="text-align:center;font-size:.75rem;margin-top:10px">
+    Made with love by your BSIT Husband 💻❤️
+  </div>
+</div>
+
+<audio id="song">
+  <source src="bi-saraha.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const song=document.getElementById("song");
+const playBtn=document.getElementById("playBtn");
+const moreBtn=document.getElementById("moreBtn");
+
+playBtn.onclick=()=>{
+  if(song.paused){song.play();playBtn.textContent="⏸ Pause";}
+  else{song.pause();playBtn.textContent="▶ Play Song";}
+};
+
+moreBtn.onclick=()=>{
+  document.getElementById("surpriseBox").style.display="block";
+};
+
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="floating-heart";
+  h.textContent="💗";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},900);
+</script>
+
+</body>
+</html>
