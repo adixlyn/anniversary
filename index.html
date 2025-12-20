@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Anniversary ❤️</title>
+
+<style>
+:root{--bg1:#ff9a9e;--bg2:#fad0c4;--bg3:#fbc2eb;--accent:#ff6f91}
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  min-height:100vh;
+  font-family:system-ui;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden
+}
+
+.card{
+  width:min(92vw,420px);
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(8px);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:pop .9s ease both
+}
+
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+
+.title{text-align:center;font-size:1.4rem;margin-bottom:6px}
+.date{text-align:center;font-size:.9rem;margin-bottom:12px}
+
+.photo{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  background:rgba(255,255,255,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+  animation:float 8s ease-in-out infinite
+}
+
+.photo img.revealed{
+  display:block;
+  animation:reveal 1.5s ease both
+}
+
+@keyframes reveal{
+  from{opacity:0;transform:scale(.8);filter:blur(20px)}
+  to{opacity:1;transform:scale(1);filter:blur(0)}
+}
+
+@keyframes float{50%{transform:scale(1.04)}}
+
+.quiz-container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  text-align:center
+}
+
+.quiz-container.hidden{display:none}
+
+.lock-icon{
+  font-size:3.5rem;
+  margin-bottom:15px;
+  animation:shake 2s infinite
+}
+
+@keyframes shake{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(-5deg)}
+  75%{transform:rotate(5deg)}
+}
+
+.quiz-title{
+  font-size:1.2rem;
+  color:#ff6f91;
+  font-weight:bold;
+  margin-bottom:15px
+}
+
+.question-label{
+  font-size:.95rem;
+  color:#333;
+  font-weight:600;
+  margin-bottom:8px;
+  display:block
+}
+
+.hint{
+  font-size:.75rem;
+  color:#888;
+  font-style:italic;
+  margin-top:5px
+}
+
+.answer-input{
+  width:100%;
+  padding:10px;
+  border:2px solid #ff6f91;
+  border-radius:10px;
+  font-size:.95rem;
+  text-align:center;
+  outline:none;
+  background:rgba(255,255,255,.9);
+  margin-bottom:14px; /* ✅ SPACE ADDED */
+}
+
+.answer-input.correct{
+  border-color:#26de81;
+  background:rgba(38,222,129,.1)
+}
+
+.progress{
+  font-size:.85rem;
+  color:#666;
+  margin-bottom:15px;
+  font-weight:600
+}
+
+.submit-btn{
+  padding:12px 35px;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  border:none;
+  border-radius:25px;
+  color:white;
+  font-size:1rem;
+  font-weight:bold;
+  cursor:pointer
+}
+
+.feedback-msg{
+  font-size:.85rem;
+  margin-top:10px;
+  padding:8px;
+  border-radius:8px;
+  font-weight:600;
+  display:none
+}
+
+.feedback-msg.error{
+  display:block;
+  color:#ff4757;
+  background:rgba(255,71,87,.1);
+  animation:shake-error .5s
+}
+
+.feedback-msg.success{
+  display:block;
+  color:#26de81;
+  background:rgba(38,222,129,.1)
+}
+
+@keyframes shake-error{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-10px)}
+  75%{transform:translateX(10px)}
+}
+
+.sparkles{
+  position:absolute;
+  font-size:2rem;
+  animation:sparkle 1s ease-out forwards;
+  pointer-events:none
+}
+
+@keyframes sparkle{
+  from{transform:scale(0);opacity:1}
+  to{transform:scale(2);opacity:0}
+}
+
+.heart{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  font-size:1.6rem;
+  animation:beat 1.3s infinite
+}
+
+@keyframes beat{50%{transform:scale(1.25)}}
+
+.message{margin-top:14px;line-height:1.5;font-size:.95rem}
+
+.controls{display:flex;gap:10px;margin-top:14px}
+
+button{
+  flex:1;
+  border:0;
+  border-radius:14px;
+  padding:10px;
+  font-weight:600;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  cursor:pointer;
+  color:white
+}
+
+button.secondary{
+  background:rgba(255,255,255,.3);
+  color:#333
+}
+
+#surpriseBox{display:none;margin-top:14px;text-align:center}
+
+.floating-heart{
+  position:fixed;
+  bottom:-20px;
+  animation:floatUp 8s linear infinite;
+  font-size:2rem
+}
+
+@keyframes floatUp{
+  to{transform:translateY(-120vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="title">Happy 1st Anniversary My Wife 💕</div>
+  <div class="date">21 December</div>
+
+  <div class="photo" id="photoContainer">
+    <div class="quiz-container" id="quizContainer">
+      <div class="lock-icon">🔒</div>
+      <div class="quiz-title">💝 Answer to Unlock Our Memory 💝</div>
+      <div class="progress" id="progress">Question 1 of 2</div>
+
+      <label class="question-label" id="questionText">What is 6 + 9 = ?</label>
+      <div class="hint" id="hintText"></div>
+
+      <input type="text" class="answer-input" id="answerInput" placeholder="Type your answer...">
+      <button class="submit-btn" id="submitBtn">SUBMIT ➜</button>
+      <div class="feedback-msg" id="feedbackMsg"></div>
+    </div>
+
+    <img src="us.jpeg" alt="Us Together" id="photoImg">
+    <div class="heart">❤️</div>
+  </div>
+
+  <div class="message">
+    Surviving 1 year of loving my angry bird from far away! 😄 Every day I choose you, even when you're mad at me.
+    Distance made me love you more. <strong>You're stuck with me forever now!</strong> 💕
+  </div>
+
+  <div class="controls">
+    <button id="playBtn">▶ Play Song</button>
+    <button class="secondary" id="moreBtn">✨ Surprise</button>
+  </div>
+
+  <div id="surpriseBox">
+    <p>MY LYN, MY WIFE, MY BABY ❤️</p>
+    <p>
+      TO MY WIFE (LYN, AN ANGRY BIRD); EVEN YOU ANGRY AT ME SOMETIMES BUT LOVE,
+      EVERY SMILE OF YOURS IS MY FAVORITE MEMORY. EVEN MILES APART, MY HEART IS
+      ALWAYS WITH YOU. I'M ALWAYS PROUD OF YOU MY LOVE 💍<br>
+      YOUR HUSBAND (ADI)
+    </p>
+  </div>
+
+  <div style="text-align:center;font-size:.75rem;margin-top:10px">
+    Made with love by your BSIT Husband 💻❤️
+  </div>
+</div>
+
+<audio id="song">
+  <source src="bi-saraha.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const song=document.getElementById("song");
+const playBtn=document.getElementById("playBtn");
+const moreBtn=document.getElementById("moreBtn");
+const photoImg=document.getElementById("photoImg");
+const quizContainer=document.getElementById("quizContainer");
+const answerInput=document.getElementById("answerInput");
+const submitBtn=document.getElementById("submitBtn");
+const feedbackMsg=document.getElementById("feedbackMsg");
+const photoContainer=document.getElementById("photoContainer");
+const questionText=document.getElementById("questionText");
+const progress=document.getElementById("progress");
+const hintText=document.getElementById("hintText");
+
+const questions=[
+  {q:"What is 6 + 9 = ?",a:"69",hint:""},
+  {q:"What is my favourite song name?",a:"DILNU",hint:"Hint: The singer is AP Dhillon"}
+];
+
+let currentQuestion=0;
+
+playBtn.onclick=()=>{
+  if(song.paused){
+    song.play();
+    playBtn.textContent="⏸ Pause";
+  }else{
+    song.pause();
+    playBtn.textContent="▶ Play Song";
+  }
+};
+
+moreBtn.onclick=()=>{
+  document.getElementById("surpriseBox").style.display="block";
+};
+
+function showFeedback(msg,type){
+  feedbackMsg.textContent=msg;
+  feedbackMsg.className="feedback-msg";
+  feedbackMsg.style.display="block";
+  void feedbackMsg.offsetWidth;
+  feedbackMsg.className="feedback-msg "+type;
+}
+
+function checkAnswer(){
+  const input=answerInput.value.trim().toUpperCase().replace(/\s+/g,"");
+  const correct=questions[currentQuestion].a.toUpperCase().replace(/\s+/g,"");
+
+  if(input===correct){
+    showFeedback("✓ Correct!","success");
+    answerInput.classList.add("correct");
+    answerInput.disabled=true;
+    submitBtn.disabled=true;
+
+    setTimeout(()=>{
+      currentQuestion++;
+      if(currentQuestion<questions.length){
+        nextQuestion();
+      }else{
+        unlockPhoto();
+      }
+    },1500);
+  }else{
+    showFeedback("✗ Try again, my love!","error");
+    answerInput.value="";
+  }
+}
+
+function nextQuestion(){
+  progress.textContent=`Question ${currentQuestion+1} of ${questions.length}`;
+  questionText.textContent=questions[currentQuestion].q;
+  hintText.textContent=questions[currentQuestion].hint;
+  answerInput.value="";
+  answerInput.classList.remove("correct");
+  answerInput.disabled=false;
+  submitBtn.disabled=false;
+  feedbackMsg.style.display="none";
+  answerInput.focus();
+}
+
+function unlockPhoto(){
+  for(let i=0;i<30;i++){
+    setTimeout(()=>{
+      const sparkle=document.createElement("div");
+      sparkle.className="sparkles";
+      sparkle.textContent=["✨","⭐","💫","🌟","💖"][Math.floor(Math.random()*5)];
+      sparkle.style.left=Math.random()*100+"%";
+      sparkle.style.top=Math.random()*100+"%";
+      photoContainer.appendChild(sparkle);
+      setTimeout(()=>sparkle.remove(),1000);
+    },i*40);
+  }
+
+  setTimeout(()=>{
+    quizContainer.classList.add("hidden");
+    photoImg.classList.add("revealed");
+  },1200);
+}
+
+submitBtn.onclick=checkAnswer;
+answerInput.addEventListener("keypress",e=>e.key==="Enter"&&checkAnswer());
+
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="floating-heart";
+  h.textContent="💗";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},900);
+</script>
+
+</body>
+</html>
